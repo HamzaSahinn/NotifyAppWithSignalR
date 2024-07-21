@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model MainModel
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="row rounded-3 shadow-sm">
+    <div class="col-sm-4 side">
+        <div class="side-one">
+            <div class="row heading">
+                <div class="col-sm-3 col-xs-3 heading-avatar">
+                    <div class="heading-avatar-icon">
+                        <img src="https://ui-avatars.com/api/?name=@(Model.CurrentUser.UserName)">
+                    </div>
+                </div>
+                <div class="col-sm-1 col-xs-1  heading-dot  pull-right">
+                    <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+                </div>
+                <div class="col-sm-2 col-xs-2 heading-compose  pull-right">
+                    <i class="fa fa-comments fa-2x  pull-right" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="row searchBox">
+                <div class="col-sm-12 searchBox-inner">
+                    <div class="form-group has-feedback">
+                        <input id="searchText" type="text" class="form-control" name="searchText" placeholder="Search" autocomplete="off">
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-column sideBar">
+                @foreach(var user in Model.Users)
+                {
+                    <div class="row sideBar-body" data-reciverid="@(user.Id)">
+                        <div class="col-sm-3 col-xs-3 sideBar-avatar">
+                            <div class="avatar-icon">
+                                <img src="https://ui-avatars.com/api/?name=@(user.UserName)">
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-xs-9 sideBar-main">
+                            <div class="row">
+                                <div class="col-sm-7 col-xs-7 sideBar-name">
+                                    <span class="name-meta">
+                                        @(user.UserName)
+                                    </span>
+                                </div>
+                                <div class="col-sm-3 col-xs-3 pull-right sideBar-time">
+                                    <span class="time-meta pull-right">
+                                    </span>
+                                </div>
+                                <div class="col-sm-2 col-xs-2 notificaitonIcon" style="display:none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:24px">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-8 conversation">
+        <div class="row heading">
+            <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
+                <div class="heading-avatar-icon" id="reciverAvatar">
+                </div>
+            </div>
+            <div class="col-sm-8 col-xs-7 heading-name">
+                <a class="heading-name-meta" id="currentReciverName">
+                </a>
+                <span class="heading-online">Online</span>
+            </div>
+            <div class="col-sm-1 col-xs-1  heading-dot pull-right">
+                <i class="fa fa-ellipsis-v fa-2x  pull-right" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div class="flex-column gap-4 message" id="conversation">
+
+        </div>
+
+        <div class="row reply">
+            <div class="col-sm-1 col-xs-1 reply-emojis">
+                <i class="fa fa-smile-o fa-2x"></i>
+            </div>
+            <div class="col-sm-9 col-xs-9 reply-main">
+                <textarea class="form-control" rows="1" id="messageInput"></textarea>
+            </div>
+            <div class="col-sm-1 col-xs-1 reply-recording">
+                <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
+            </div>
+            <div class="col-sm-1 col-xs-1 reply-send" id="sendButton">
+                <i class="fa fa-send fa-2x" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/chatHub.js" asp-append-version="true"></script>
+    <script src="~/lib/typeahead/typeahead.bundle.min.js" asp-append-version="true"></script>
+}
+
